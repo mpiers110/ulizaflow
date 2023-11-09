@@ -1,0 +1,11 @@
+.brandi{
+    font-size: 1rem;
+    color: #212529;
+    text-align: center;
+    list-style: none;
+    background-color: #43be29e0;
+    background-clip: padding-box;
+    border: 1px solid #0b7a24;
+    border-radius: .25rem;
+    box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 18%);
+}
