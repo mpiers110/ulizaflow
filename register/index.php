@@ -33,7 +33,7 @@ session_start();
   <div class="card">
   <div class="card-body register-card-body">
   <div class="bs-stepper linear">
-    <form method="POST" action="../account/register.php">
+    <form method="POST">
           <div class="bs-stepper-header" role="tablist">
             <!-- your steps here -->
             <div class="step active" data-target="#logins-part">
@@ -74,7 +74,7 @@ session_start();
 
               <button type="button" class="btn btn-primary" id="next" onclick="stepper.next()">Next</button>
               <p class="mb-0">
-        <a href="../" class="text-center">Already have an account</a>
+        <a href="../login/" class="text-center">Already have an account</a>
       </p>
             </div>
             <div id="information-part" class="content" role="tabpanel" aria-labelledby="information-part-trigger">
@@ -107,7 +107,7 @@ session_start();
                 </div>
               </div>
               <button type="button" class="btn btn-primary" onclick="stepper.previous()">Previous</button>
-              <button type="submit" id="send" class="btn btn-primary">Submit</button>
+              <button type="button" id="send" class="btn btn-primary" onclick="register()">Submit</button>
               </div>
           </div>
         </form>
