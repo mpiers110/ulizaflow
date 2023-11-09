@@ -194,7 +194,6 @@ if ( isset($_SESSION['msg']) ) {
     timer: 3000
   });
 </script>
-<script src="../../config.js"></script>
 <script src="profile.js"></script>
 <script>loadUserData(<?php echo $_SESSION['id']; ?>)</script>
 <script>userAnswered(<?php echo $_SESSION['id']; ?>)</script>

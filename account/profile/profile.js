@@ -23,13 +23,13 @@ async function loadUserData(id) {
 					            <b>Email:</b> <a class="float-right">${user.user_email}</a>
 					          </li>
 					          <li class="list-group-item">
-					            <b>Rating:</b> <a class="float-right" id="userR"></a>
+					            <b>Rating:</b> <a class="float-right" id="userR">0</a>
 					          </li>
 					          <li class="list-group-item">
-					            <b>Asked Questions:</b> <a class="float-right" id="askedQ"></a>
+					            <b>Asked Questions:</b> <a class="float-right" id="askedQ">0</a>
 					          </li>
 					          <li class="list-group-item">
-					            <b>Answered Questions:</b> <a class="float-right" id="answeredQ"></a>
+					            <b>Answered Questions:</b> <a class="float-right" id="answeredQ">0</a>
 					          </li>
 					        </ul>
 				        </div>
@@ -146,7 +146,7 @@ async function logout(id){
 	doLogout().then(data => {
 			let response = data
 			if(response == "User Logged Out"){
-	    	location.href = appUrl
+	    	location.href = document.location.origin+'/ulizaflow/'
 	    }else{
 	    	Toast.fire({
 			    icon: 'error',
@@ -178,7 +178,9 @@ function userAsked(id){
     url: document.location.origin+'/ulizaflow/backend/account/users/?askedQuestions='+user_id,
     type: "GET",
     success: function(response){
+		if (response !== 0 && response !== null) {
 			$(document).find('.card-body.box-profile #askedQ').text(response);
+		}		
     }
 	});
 }
@@ -188,7 +190,9 @@ function userAnswered(id){
     url: document.location.origin+'/ulizaflow/backend/account/users/?answeredQuestions='+user_id,
     type: "GET",
     success: function(response){
+		if (response !== 0 && response !== null) {
 			$(document).find('.card-body.box-profile #answeredQ').text(response);
+		}
     }
 	});
 }
@@ -198,8 +202,10 @@ function userRating(id){
     url: document.location.origin+'/ulizaflow/backend/account/users/?userRating='+user_id,
     type: "GET",
     success: function(response){
-    	let rate = Math.round((response/$(document).find('.card-body.box-profile #answeredQ').text())*100);
+		if (response !== 0 && response !== null) {
+    		let rate = Math.round((response/$(document).find('.card-body.box-profile #answeredQ').text())*100);
 			$(document).find('.card-body.box-profile #userR').text(rate+" %");
+		}
     }
 	});
 }

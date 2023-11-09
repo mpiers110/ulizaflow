@@ -455,7 +455,7 @@ async function logout(id){
 	doLogout().then(data => {
 			let response = data
 			if(response == "User Logged Out"){
-	    	location.href = appUrl
+	    	location.href = document.location.origin+'/ulizaflow/'
 	    }else{
 	    	Toast.fire({
 			    icon: 'error',
