@@ -1,6 +1,6 @@
 async function showQuestions(){
 	try{
-		const url = appUrl+'backend/account/thread/?fetchAllQuiz';
+		const url = document.location.origin+'/ulizaflow/backend/account/thread/?fetchAllQuiz';
 		const results = await fetch(url)
 		const finalData = await results.json()
 		if(finalData == "None"){
@@ -41,7 +41,7 @@ showQuestions()
 $(document).ready(function(){
 	try{
 		$.ajax({
-	    url: appUrl+'backend/account/?getCategories',
+	    url: document.location.origin+'/ulizaflow/backend/account/?getCategories',
 	    type: "GET",
 	    success: function(response){
 	    	response.forEach((tag) => {
@@ -57,7 +57,7 @@ $(document).ready(function(){
 })
 async function openQuiz(id){
 	try{
-		const url = appUrl+'backend/account/thread/?existing='+id;
+		const url = document.location.origin+'/ulizaflow/backend/account/thread/?existing='+id;
 		const results = await fetch(url)
 		const finalData = await results.json()
 		$('#askbox').append(`
@@ -143,7 +143,7 @@ async function openQuiz(id){
 				let formData = $('#giveAnswer').serializeArray()
 				let key = $('#answerFX').attr('data-id')
 			    $.ajax({
-				    url: appUrl+'backend/account/answer/?insertAnswers',
+				    url: document.location.origin+'/ulizaflow/backend/account/answer/?insertAnswers',
 				    type: "POST",
 				    data: formData, 
 				    cache: false,
@@ -209,7 +209,7 @@ function comment(){
 }
 async function showAnswers(id){
 	try{
-		const url = appUrl+'backend/account/answer/?question_id='+id;
+		const url = document.location.origin+'/ulizaflow/backend/account/answer/?question_id='+id;
 		const results = await fetch(url)
 		const finalData = await results.json()		
 			if(finalData == "No Answers"){
@@ -274,7 +274,7 @@ function downvote(element){
 }
 async function popAnswer(id){
 	try{
-		const url = appUrl+'backend/account/answer/?getAnswer='+id;
+		const url = document.location.origin+'/ulizaflow/backend/account/answer/?getAnswer='+id;
 		const results = await fetch(url)
 		const finalData = await results.json()
 		finalData.forEach((val) => {
@@ -290,11 +290,11 @@ async function popAnswer(id){
 }
 async function checkQuestion() {
 	let value = $('#title').val()
-	const url = appUrl+'backend/account/thread/?userProfile='+value;
+	const url = document.location.origin+'/ulizaflow/backend/account/thread/?userProfile='+value;
 	const docheck = async () => {
 	  	try{
 				const results = await $.ajax({
-																    	url: appUrl+'backend/account/thread/?checktitle',
+																    	url: document.location.origin+'/ulizaflow/backend/account/thread/?checktitle',
 																    	type: "POST",
 																    	data: {
 																    		value:value
@@ -329,7 +329,7 @@ function acceptAnswer(){
 	let keyword = $('#accept-answer').attr('data-val');
 	let key = $('#answerFX').attr('data-id');
 	$.ajax({
-  	url: appUrl+'backend/account/answer/?acceptAnswer',
+  	url: document.location.origin+'/ulizaflow/backend/account/answer/?acceptAnswer',
   	method: "POST",
   	data: {keyword:keyword},
   	success: function(response){
@@ -354,7 +354,7 @@ function rejectAnswer(){
 	let keyword = $('#reject-answer').attr('data-val');
 	let key = $('#answerFX').attr('data-id');
 	$.ajax({
-  	url: appUrl+'backend/account/answer/?rejectAnswer',
+  	url: document.location.origin+'/ulizaflow/backend/account/answer/?rejectAnswer',
   	method: "POST",
   	data: {keyword:keyword},
   	success: function(response){
@@ -414,7 +414,7 @@ $('#ulizaQuestion').validate({
   submitHandler: function(){
   	let formData = $('#ulizaQuestion').serializeArray()
   	$.ajax({
-	    url: appUrl+'backend/account/thread/?askQuestion',
+	    url: document.location.origin+'/ulizaflow/backend/account/thread/?askQuestion',
 	    type: "POST",
 	    data: formData, 
 	    cache: false,
@@ -443,7 +443,7 @@ async function logout(id){
 	const doLogout = async () => {
   	try{
 			const results = await $.ajax({
-													    url: appUrl+'backend/auth/logout/?endSession='+id,
+													    url: document.location.origin+'/ulizaflow/backend/auth/logout/?endSession='+id,
 													    type: "GET",
 													    dataType: "text"
 														});
