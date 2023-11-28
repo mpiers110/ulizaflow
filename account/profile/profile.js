@@ -1,7 +1,7 @@
 async function loadUserData(id) {
 	let user_id = id;
 	try{
-		const url = appUrl+'backend/account/users/?userProfile='+user_id;
+		const url = document.location.origin+'/ulizaflow/backend/account/users/?userProfile='+user_id;
 		const results = await fetch(url)
 		const finalData = await results.json()
 		finalData.forEach((user) => {
@@ -23,13 +23,13 @@ async function loadUserData(id) {
 					            <b>Email:</b> <a class="float-right">${user.user_email}</a>
 					          </li>
 					          <li class="list-group-item">
-					            <b>Rating:</b> <a class="float-right" id="userR"></a>
+					            <b>Rating:</b> <a class="float-right" id="userR">0</a>
 					          </li>
 					          <li class="list-group-item">
-					            <b>Asked Questions:</b> <a class="float-right" id="askedQ"></a>
+					            <b>Asked Questions:</b> <a class="float-right" id="askedQ">0</a>
 					          </li>
 					          <li class="list-group-item">
-					            <b>Answered Questions:</b> <a class="float-right" id="answeredQ"></a>
+					            <b>Answered Questions:</b> <a class="float-right" id="answeredQ">0</a>
 					          </li>
 					        </ul>
 				        </div>
@@ -98,7 +98,7 @@ async function loadUserData(id) {
 			  	submitHandler: function (form) {
 			    let formData = new FormData(form)
 			    $.ajax({
-				    url: appUrl+'backend/account/users/?updateUser',
+				    url: document.location.origin+'/ulizaflow/backend/account/users/?updateUser',
 				    //dataType: 'text', 
 				    cache: false, 
 				    contentType: false, 
@@ -134,7 +134,7 @@ async function logout(id){
 	const doLogout = async () => {
 	  	try{
 			const results = await $.ajax({
-									    	url: appUrl+'backend/auth/logout/?endSession='+id,
+									    	url: document.location.origin+'/ulizaflow/backend/auth/logout/?endSession='+id,
 									    	type: "GET",
 									    	dataType: "text"
 										});
@@ -146,7 +146,7 @@ async function logout(id){
 	doLogout().then(data => {
 			let response = data
 			if(response == "User Logged Out"){
-	    	location.href = appUrl
+	    	location.href = document.location.origin+'/ulizaflow/'
 	    }else{
 	    	Toast.fire({
 			    icon: 'error',
@@ -158,7 +158,7 @@ async function logout(id){
 $(document).ready(function(){
 	try{
 		$.ajax({
-	    url: appUrl+'backend/account/?getCategories',
+	    url: document.location.origin+'/ulizaflow/backend/account/?getCategories',
 	    type: "GET",
 	    success: function(response){
 	    	response.forEach((tag) => {
@@ -175,31 +175,37 @@ $(document).ready(function(){
 function userAsked(id){
 	let user_id = id;
 	$.ajax({
-    url: appUrl+'backend/account/users/?askedQuestions='+user_id,
+    url: document.location.origin+'/ulizaflow/backend/account/users/?askedQuestions='+user_id,
     type: "GET",
     success: function(response){
+		if (response !== 0 && response !== null) {
 			$(document).find('.card-body.box-profile #askedQ').text(response);
+		}		
     }
 	});
 }
 function userAnswered(id){
 	let user_id = id;
 	$.ajax({
-    url: appUrl+'backend/account/users/?answeredQuestions='+user_id,
+    url: document.location.origin+'/ulizaflow/backend/account/users/?answeredQuestions='+user_id,
     type: "GET",
     success: function(response){
+		if (response !== 0 && response !== null) {
 			$(document).find('.card-body.box-profile #answeredQ').text(response);
+		}
     }
 	});
 }
 function userRating(id){
 	let user_id = id;
 	$.ajax({
-    url: appUrl+'backend/account/users/?userRating='+user_id,
+    url: document.location.origin+'/ulizaflow/backend/account/users/?userRating='+user_id,
     type: "GET",
     success: function(response){
-    	let rate = Math.round((response/$(document).find('.card-body.box-profile #answeredQ').text())*100);
+		if (response !== 0 && response !== null) {
+    		let rate = Math.round((response/$(document).find('.card-body.box-profile #answeredQ').text())*100);
 			$(document).find('.card-body.box-profile #userR').text(rate+" %");
+		}
     }
 	});
 }
@@ -242,7 +248,7 @@ $('#ulizaQuestion').validate({
   submitHandler: function(){
   	let formData = $('#ulizaQuestion').serializeArray()
   	$.ajax({
-	    url: appUrl+'backend/account/thread/?askQuestion',
+	    url: document.location.origin+'/ulizaflow/backend/account/thread/?askQuestion',
 	    type: "POST",
 	    data: formData, 
 	    cache: false,

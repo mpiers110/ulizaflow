@@ -1,6 +1,6 @@
 async function loadUsers() {
 	try{
-		const url = appUrl+'backend/account/users/?fetchAll';
+		const url = document.location.origin+'/ulizaflow/backend/account/users/?fetchAll';
 		const results = await fetch(url)
 		const finalData = await results.json()
 		finalData.forEach((user) => {
@@ -40,7 +40,7 @@ loadUsers()
 $(document).ready(function(){
 	try{
 		$.ajax({
-	    url: appUrl+'backend/account/?getCategories',
+	    url: document.location.origin+'/ulizaflow/backend/account/?getCategories',
 	    type: "GET",
 	    success: function(response){
 	    	response.forEach((tag) => {
@@ -56,7 +56,7 @@ $(document).ready(function(){
 })
 async function viewUser(id) {
 	try{
-		const url = appUrl+'backend/account/users/?existing='+id;
+		const url = document.location.origin+'/ulizaflow/backend/account/users/?existing='+id;
 		const results = await fetch(url)
 		const finalData = await results.json()
 		$('#askbox').append(`
@@ -180,7 +180,7 @@ $('#ulizaQuestion').validate({
   submitHandler: function(){
   	let formData = $('#ulizaQuestion').serializeArray()
   	$.ajax({
-	    url: appUrl+'backend/account/thread/?askQuestion',
+	    url: document.location.origin+'/ulizaflow/backend/account/thread/?askQuestion',
 	    type: "POST",
 	    data: formData, 
 	    cache: false,
@@ -206,7 +206,7 @@ async function logout(id){
 	const doLogout = async () => {
 	  	try{
 			const results = await $.ajax({
-										url: appUrl+'backend/auth/logout/?endSession='+id,
+										url: document.location.origin+'/ulizaflow/backend/auth/logout/?endSession='+id,
 										type: "GET",
 										dataType: "text"
 									});
@@ -218,7 +218,7 @@ async function logout(id){
 	doLogout().then(data => {
 			let response = data
 			if(response == "User Logged Out"){
-	    	location.href = appUrl
+	    	location.href = document.location.origin+'/ulizaflow/'
 	    }else{
 	    	Toast.fire({
 			    icon: 'error',

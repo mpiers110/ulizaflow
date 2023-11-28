@@ -6,7 +6,7 @@
     </ul>
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
-      <li class="nav-item dropdown" title="Student Profile">
+      <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#" role="button">
             <i class="fas fa-user"></i>
         </a>

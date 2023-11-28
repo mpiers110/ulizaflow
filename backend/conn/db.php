@@ -29,7 +29,7 @@ class DataSource
     private $username = DB_USERNAME;
     private $password = DB_PASSWORD;
     private $database = DB_NAME;
-    private $thisn;
+    private $conn;
 
     /**
      * PHP implicitly takes care of cleanup for default connection types.
@@ -72,7 +72,7 @@ class DataSource
      * @param array $paramArray
      * @return array
      */
-    protected function select($query, $paramType = "", $paramArray = array())
+    public function select($query, $paramType = "", $paramArray = array())
     {
         $stmt = $this->conn->prepare($query);
 
@@ -102,7 +102,7 @@ class DataSource
      * @param array $paramArray
      * @return int
      */
-    protected function insert($query, $paramType, $paramArray)
+    public function insert($query, $paramType, $paramArray)
     {
         $stmt = $this->conn->prepare($query);
         $this->bindQueryParams($stmt, $paramType, $paramArray);
@@ -119,7 +119,7 @@ class DataSource
      * @param string $paramType
      * @param array $paramArray
      */
-    protected function execute($query, $paramType = "", $paramArray = array())
+    public function execute($query, $paramType = "", $paramArray = array())
     {
         $stmt = $this->conn->prepare($query);
 
@@ -138,7 +138,7 @@ class DataSource
      * @param string $paramType
      * @param array $paramArray
      */
-    protected function bindQueryParams($stmt, $paramType, $paramArray = array())
+    public function bindQueryParams($stmt, $paramType, $paramArray = array())
     {
         $paramValueReference[] = &$paramType;
         for ($i = 0; $i < count($paramArray); $i++) {
@@ -158,7 +158,7 @@ class DataSource
      * @param array $paramArray
      * @return array
      */
-    protected function getRecordCount($query, $paramType = "", $paramArray = array())
+    public function getRecordCount($query, $paramType = "", $paramArray = array())
     {
         $stmt = $this->conn->prepare($query);
         if (!empty($paramType) && !empty($paramArray)) {

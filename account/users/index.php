@@ -193,7 +193,6 @@ if ( isset($_SESSION['msg']) ) {
     timer: 3000
   });
 </script>
-<script src="../../config.js"></script>
 <script src="users.js"></script>
 <?php 
   if ( isset($_GET['user']) && !empty($_GET['user']) ) { ?>

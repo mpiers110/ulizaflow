@@ -43,7 +43,7 @@ function checkUser(element){
     let keyword = $(element).val();
     let id =  $(element).attr('id')
     $.ajax({
-        url: appUrl+'backend/auth/register/?checkuser='+id,
+        url: document.location.origin+'/ulizaflow/backend/auth/register/?checkuser='+id,
         type: "POST",
         data: {
             keyword:keyword,         
@@ -81,4 +81,29 @@ function checkUser(element){
         }
     });
 }
-
+function register(){
+    let dob = $('#dob').val();
+    let email = $('#email').val();
+    let username = $('#username').val();
+    let password = $('#pass1').val();
+    $.ajax({
+        url: document.location.origin+'/ulizaflow/backend/auth/register/?registeruser',
+        type: "POST",
+        data: {
+            dob:dob,
+            email: email,
+            username: username,
+            password: password,         
+        },
+        success: function(response){
+            if (response === 'Account registration successfull'){
+                window.location.href = document.location.origin+'/ulizaflow/account/';
+            }else{
+                alert(response);
+            }
+        },
+        error: function(error){
+            console.error(error)
+        }
+    });
+}

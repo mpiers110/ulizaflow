@@ -249,7 +249,7 @@ async function logout(id){
 	const doLogout = async () => {
   	try{
 			const results = await $.ajax({
-													    url: appUrl+'backend/auth/logout/?endSession='+id,
+													    url: document.location.origin+'/ulizaflow/backend/auth/logout/?endSession='+id,
 													    type: "GET",
 													    dataType: "text"
 														});

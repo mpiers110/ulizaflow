@@ -197,7 +197,6 @@ if ( isset($_SESSION['msg']) ) {
     timer: 3000
   });
 </script>
-<script src="../../config.js"></script>
 <script src="tags.js"></script>
 <?php 
   if ( isset($_GET['q']) && !empty($_GET['q']) ) { ?>
